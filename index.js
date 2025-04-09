@@ -7,7 +7,7 @@ const TARGET_BROKERS = process.env.TARGET_BROKERS.split(',');
 const SOURCE_TOPIC = process.env.SOURCE_TOPIC;
 const TARGET_TOPIC = process.env.TARGET_TOPIC;
 
-const ENABLE_TLS = process.env.ENABLE_TLS === 'true';
+
 
 const SASL_CONFIG = (username, password) => ({
   mechanism: 'plain',
@@ -15,13 +15,13 @@ const SASL_CONFIG = (username, password) => ({
   password,
 });
 
-const TLS_CONFIG = ENABLE_TLS ? {} : undefined;
+
 
 // --------- SOURCE CLIENT ---------
 const sourceKafka = new Kafka({
   clientId: 'source-client',
   brokers: SOURCE_BROKERS,
-  ssl: TLS_CONFIG,
+  ssl: false,
   sasl: SASL_CONFIG(process.env.SOURCE_SASL_USERNAME, process.env.SOURCE_SASL_PASSWORD),
   logLevel: logLevel.INFO,
 });
@@ -31,7 +31,7 @@ const consumer = sourceKafka.consumer({ groupId: 'kafka-bridge-group' });
 const targetKafka = new Kafka({
   clientId: 'target-client',
   brokers: TARGET_BROKERS,
-  ssl: TLS_CONFIG,
+  ssl: false,
   sasl: SASL_CONFIG(process.env.TARGET_SASL_USERNAME, process.env.TARGET_SASL_PASSWORD),
   logLevel: logLevel.INFO,
 });
