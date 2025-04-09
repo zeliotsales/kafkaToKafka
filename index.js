@@ -10,7 +10,7 @@ const TARGET_TOPIC = process.env.TARGET_TOPIC;
 
 
 const SASL_CONFIG = (username, password) => ({
-  mechanism: 'plain',
+  mechanism: 'scram-sha-512',
   username,
   password,
 });
