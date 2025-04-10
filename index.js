@@ -25,7 +25,7 @@ const sourceKafka = new Kafka({
   sasl: SASL_CONFIG(process.env.SOURCE_SASL_USERNAME, process.env.SOURCE_SASL_PASSWORD),
   logLevel: logLevel.INFO,
 });
-const consumer = sourceKafka.consumer({ groupId: 'kafka-bridge-group' });
+const consumer = sourceKafka.consumer({ groupId: 'kafka-bridge-group-demo' });
 
 // --------- TARGET CLIENT ---------
 const targetKafka = new Kafka({
